@@ -129,20 +129,20 @@ link_directories(
 # Generation of SDF models #
 #--------------------------#
 
-set(enable_mavlink_interface "true")
-set(enable_ground_truth "false")
-set(enable_logging "false")
-set(enable_camera "false")
-set(rotors_description_dir "${CMAKE_CURRENT_SOURCE_DIR}/models/rotors_description")
-set(scripts_dir "${CMAKE_CURRENT_SOURCE_DIR}/scripts")
-add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  COMMAND rm -f ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf
-  COMMAND python ${scripts_dir}/xacro.py -o  ${rotors_description_dir}/urdf/f450_base.urdf  ${rotors_description_dir}/urdf/f450_base.xacro enable_mavlink_interface:=${enable_mavlink_interface} enable_ground_truth:=${enable_ground_truth} enable_logging:=${enable_logging} rotors_description_dir:=${rotors_description_dir} 
-  COMMAND gz sdf -p  ${rotors_description_dir}/urdf/f450_base.urdf >> ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf
-  COMMAND rm -f ${rotors_description_dir}/urdf/f450_base.urdf
-  )
-add_custom_target(sdf ALL DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf)
+#set(enable_mavlink_interface "true")ddddd
+#set(enable_ground_truth "false")
+#set(enable_logging "false")
+#set(enable_camera "false")
+#set(rotors_description_dir "${CMAKE_CURRENT_SOURCE_DIR}/models/rotors_description")
+#set(scripts_dir "${CMAKE_CURRENT_SOURCE_DIR}/scripts")
+#add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf
+#  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#  COMMAND rm -f ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf
+#  COMMAND python ${scripts_dir}/xacro.py -o  ${rotors_description_dir}/urdf/iris_base.urdf  ${rotors_description_dir}/urdf/f450_base.xacro enable_mavlink_interface:=${enable_mavlink_interface} enable_ground_truth:=${enable_ground_truth} enable_logging:=${enable_logging} rotors_description_dir:=${rotors_description_dir} 
+#  COMMAND gz sdf -p  ${rotors_description_dir}/urdf/iris_base.urdf >> ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf
+#  COMMAND rm -f ${rotors_description_dir}/urdf/iris_base.urdf
+#  )
+#add_custom_target(sdf ALL DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/models/f450/f450.sdf)
 
 #--------------------#
 # Message Generation #
