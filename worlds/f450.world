@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <!-- A global light source -->
+    <spherical_coordinates>
+    <surface_model>EARTH_WGS84</surface_model>
+   <latitude_deg>36.143494</latitude_deg>
+    <longitude_deg>-86.798458</longitude_deg>
+    <elevation>5.8</elevation>
+    <heading_deg>5.458</heading_deg>
+    </spherical_coordinates>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://f450</uri>
+    </include>
+  </world>
+</sdf>
