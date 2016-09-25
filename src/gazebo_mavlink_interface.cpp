@@ -498,9 +498,9 @@ void GazeboMavlinkInterface::OnUpdate(const common::UpdateInfo& /*_info*/) {
 
   // TODO: Remove GPS message from IMU plugin. Added gazebo GPS plugin. This is temp here.
   // Zurich Irchel Park
-  const double lat_zurich = 47.397742 * M_PI / 180;  // rad
-  const double lon_zurich = 8.545594 * M_PI / 180;  // rad
-  const double alt_zurich = 488.0; // meters
+  const double lat_zurich = 36.14349400000000 * M_PI / 180;  // rad
+  const double lon_zurich = -86.79845800000000 * M_PI / 180;  // rad
+  const double alt_zurich = 117.0; // meters
   // Seattle downtown (15 deg declination): 47.592182, -122.316031
   // const double lat_zurich = 47.592182 * M_PI / 180;  // rad
   // const double lon_zurich = -122.316031 * M_PI / 180;  // rad
