@@ -1,4 +1,5 @@
-<sdf version='1.6'>
+<?xml version='1.0'?>
+<sdf version='1.5'>
   <model name='f450'>
     <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
@@ -7,32 +8,17 @@
         <mass>2</mass>
         <inertia>
           <ixx>0.0337</ixx>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
           <iyy>0.0337</iyy>
-          <iyz>0.0</iyz>
+          <iyz>0</iyz>
           <izz>0.0185</izz>
         </inertia>
       </inertial>
-      <collision name='base_link_inertia_collision'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.47 0.47 0.11</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <velocity_decay/>
+      <gravity>1</gravity>
       <visual name='base_link_inertia_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
@@ -46,11 +32,63 @@
             <name>Gazebo/White</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0 0 0 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
         </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-      <self_collide>0</self_collide>
+      <collision name='base_link_inertia_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>/home/jdas/src/Firmware/Tools/sitl_gazebo/models/rotors_description/meshes/f450.dae</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
     </link>
     <link name='/imu_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
@@ -66,29 +104,14 @@
           <izz>1e-05</izz>
         </inertia>
       </inertial>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
     </link>
-    <joint name='/imu_joint' type='revolute'>
-      <child>/imu_link</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-<link name='f450/robot_camera'>
-   <pose>0.12 0 0.06 0 0 0</pose>
+
+    <link name='f450/robot_camera'>
+      <pose frame=''>0.12 -0 0.06 0 -0 0</pose>
       <inertial>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.015</mass>
         <inertia>
           <ixx>1e-06</ixx>
@@ -99,55 +122,60 @@
           <izz>1e-06</izz>
         </inertia>
       </inertial>
-  <visual name="visual">
-    <geometry>
-      <box>
-        <size>0.001 0.001 0.001</size>
-      </box>
-    </geometry>
-  </visual>
-
-  <sensor name='camera' type='camera'>
-    <always_on>true</always_on>
-    <update_rate>30</update_rate>
-
-    <camera>
-      <horizontal_fov>1</horizontal_fov>
-      <image>
-        <width>640</width>
-        <height>480</height>
-      </image>
-      <clip>
-        <near>0.1</near>
-        <far>100</far>
-      </clip>
-    </camera>
-
-    <plugin name="camera_plugin" filename="libgazebo_ros_camera.so">
-      <alwaysOn>true</alwaysOn>
-      <imageTopicName>image_raw_front</imageTopicName>
-      <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-      <updateRate>10.0</updateRate>
-      <cameraName>uav_camera</cameraName>
-      <frameName>f450/robot_camera</frameName>
-      <CxPrime>320.5</CxPrime>
-      <Cx>320.5</Cx>
-      <Cy>240.5</Cy>
-      <hackBaseline>0</hackBaseline>
-      <focalLength>10</focalLength>
-      <distortionK1>0.0</distortionK1>
-      <distortionK2>0.0</distortionK2>
-      <distortionK3>0.0</distortionK3>
-      <distortionT1>0.0</distortionT1>
-      <distortionT2>0.0</distortionT2>
-    </plugin>
-  </sensor>
-</link>
-
-<link name='f450/robot_camera_down'>
-   <pose>-0.12 0 0.01 0 1.57079 0</pose>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <sensor name='camera' type='camera'>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <camera name='__default__'>
+          <horizontal_fov>1</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <plugin name='camera_plugin' filename='libgazebo_ros_camera.so'>
+          <alwaysOn>true</alwaysOn>
+          <imageTopicName>image_raw_front</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <updateRate>10.0</updateRate>
+          <cameraName>uav_camera</cameraName>
+          <frameName>f450/robot_camera</frameName>
+          <CxPrime>320.5</CxPrime>
+          <Cx>320.5</Cx>
+          <Cy>240.5</Cy>
+          <hackBaseline>0</hackBaseline>
+          <focalLength>10</focalLength>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+          <robotNamespace>/</robotNamespace>
+        </plugin>
+      </sensor>
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>0.001 0.001 0.001</size>
+          </box>
+        </geometry>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
+        <material>
+          <shader type='pixel'/>
+        </material>
+      </visual>
+    </link>
+    <link name='f450/robot_camera_down'>
+      <pose frame=''>-0.12 -0 0.01 -9.4e-05 1.57079 -9.4e-05</pose>
       <inertial>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.015</mass>
         <inertia>
           <ixx>1e-06</ixx>
@@ -158,54 +186,60 @@
           <izz>1e-06</izz>
         </inertia>
       </inertial>
-  <visual name="visual">
-    <geometry>
-      <box>
-        <size>0.001 0.001 0.001</size>
-      </box>
-    </geometry>
-  </visual>
-
-  <sensor name='camera' type='camera'>
-    <always_on>true</always_on>
-    <update_rate>30</update_rate>
-
-    <camera>
-      <horizontal_fov>1</horizontal_fov>
-      <image>
-        <width>640</width>
-        <height>480</height>
-      </image>
-      <clip>
-        <near>0.1</near>
-        <far>100</far>
-      </clip>
-    </camera>
-
-    <plugin name="camera_plugin" filename="libgazebo_ros_camera.so">
-      <alwaysOn>true</alwaysOn>
-      <imageTopicName>image_raw_down</imageTopicName>
-      <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-      <updateRate>10.0</updateRate>
-      <cameraName>uav_camera</cameraName>
-      <frameName>f450/robot_camera_down</frameName>
-      <CxPrime>320.5</CxPrime>
-      <Cx>320.5</Cx>
-      <Cy>240.5</Cy>
-      <hackBaseline>0</hackBaseline>
-      <focalLength>1</focalLength>
-      <distortionK1>0.0</distortionK1>
-      <distortionK2>0.0</distortionK2>
-      <distortionK3>0.0</distortionK3>
-      <distortionT1>0.0</distortionT1>
-      <distortionT2>0.0</distortionT2>
-    </plugin>
-  </sensor>
-</link>
-<link name='f450/robot_sonar_down'>
-   <pose>-0.15 0 0.01 0 1.57079 0</pose>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <sensor name='camera' type='camera'>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <camera name='__default__'>
+          <horizontal_fov>1</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <plugin name='camera_plugin' filename='libgazebo_ros_camera.so'>
+          <alwaysOn>true</alwaysOn>
+          <imageTopicName>image_raw_down</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <updateRate>10.0</updateRate>
+          <cameraName>uav_camera</cameraName>
+          <frameName>f450/robot_camera_down</frameName>
+          <CxPrime>320.5</CxPrime>
+          <Cx>320.5</Cx>
+          <Cy>240.5</Cy>
+          <hackBaseline>0</hackBaseline>
+          <focalLength>1</focalLength>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+          <robotNamespace>/</robotNamespace>
+        </plugin>
+      </sensor>
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>0.001 0.001 0.001</size>
+          </box>
+        </geometry>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
+        <material>
+          <shader type='pixel'/>
+        </material>
+      </visual>
+    </link>
+    <link name='f450/robot_sonar_down'>
+      <pose frame=''>-0.15 0 0.01 -9.4e-05 1.57079 -9.4e-05</pose>
       <inertial>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.015</mass>
         <inertia>
           <ixx>1e-06</ixx>
@@ -216,100 +250,49 @@
           <izz>1e-06</izz>
         </inertia>
       </inertial>
-  <visual name="visual">
-    <geometry>
-      <box>
-        <size>0.001 0.001 0.001</size>
-      </box>
-    </geometry>
-  </visual>
-
-  <sensor name='sonar' type='ray'>
-    <always_on>true</always_on>
-    <update_rate>100</update_rate>
-<ray>
-  <range>
-    <min>0.2</min>
-    <max>40</max>
-    <resolution>0.01</resolution>
-
-  </range>
-  <scan>
-    <horizontal>
-      <samples>100</samples>
-      <min_angle>-3</min_angle>
-      <max_angle>3</max_angle>
-    </horizontal>
-  </scan>
-</ray>
-
-    <plugin name="gazebo_ros_sonar_controller" filename="libhector_gazebo_ros_sonar.so">
-     <gaussianNoise>0.02</gaussianNoise>
-      <topicName>sonar</topicName>
-      <frameId>sonar_link</frameId>
-    </plugin>
-  </sensor>
-</link>
-
-     <joint name='f450/down_sonar_joint' type='revolute'>
-      <child>f450/robot_sonar_down</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-
- <joint name='f450/front_cam_joint' type='revolute'>
-      <child>f450/robot_camera</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-
- <joint name='f450/down_cam_joint' type='revolute'>
-      <child>f450/robot_camera_down</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <sensor name='sonar' type='ray'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <ray>
+          <range>
+            <min>0.2</min>
+            <max>40</max>
+            <resolution>0.01</resolution>
+          </range>
+          <scan>
+            <horizontal>
+              <samples>100</samples>
+              <min_angle>-3</min_angle>
+              <max_angle>3</max_angle>
+              <resolution>1</resolution>
+            </horizontal>
+          </scan>
+        </ray>
+        <plugin name='gazebo_ros_sonar_controller' filename='libhector_gazebo_ros_sonar.so'>
+          <gaussianNoise>0.02</gaussianNoise>
+          <topicName>sonar</topicName>
+          <frameId>sonar_link</frameId>
+          <robotNamespace>/</robotNamespace>
+        </plugin>
+      </sensor>
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>0.001 0.001 0.001</size>
+          </box>
+        </geometry>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
+        <material>
+          <shader type='pixel'/>
+        </material>
+      </visual>
+    </link>
     <link name='rotor_0'>
-      <pose>0.159 -0.159 0.11 0 -0 0</pose>
+      <pose frame=''>0.159 -0.159 0.11 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -322,23 +305,9 @@
           <izz>0.000274004</izz>
         </inertia>
       </inertial>
-      <collision name='rotor_0_collision'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.128</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <velocity_decay/>
       <visual name='rotor_0_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
@@ -352,30 +321,65 @@
             <name>Gazebo/Green</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 1 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <shader type='pixel'/>
         </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-      <self_collide>0</self_collide>
+      <collision name='rotor_0_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.128</radius>
+            <length>0.005</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
     </link>
-    <joint name='rotor_0_joint' type='revolute'>
-      <child>rotor_0</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
     <link name='rotor_1'>
-      <pose>-0.159 0.159 0.11 0 -0 0</pose>
+      <pose frame=''>-0.159 0.159 0.11 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -388,23 +392,9 @@
           <izz>0.000274004</izz>
         </inertia>
       </inertial>
-      <collision name='rotor_1_collision'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.128</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <velocity_decay/>
       <visual name='rotor_1_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
@@ -418,28 +408,63 @@
             <name>Gazebo/Red</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <shader type='pixel'/>
         </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-      <self_collide>0</self_collide>
+      <collision name='rotor_1_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.128</radius>
+            <length>0.005</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
     </link>
-    <joint name='rotor_1_joint' type='revolute'>
-      <child>rotor_1</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
     <link name='rotor_2'>
       <pose frame=''>0.159 0.159 0.11 0 -0 0</pose>
       <inertial>
@@ -454,23 +479,9 @@
           <izz>0.000274004</izz>
         </inertia>
       </inertial>
-      <collision name='rotor_2_collision'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.128</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <velocity_decay/>
       <visual name='rotor_2_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
@@ -484,28 +495,63 @@
             <name>Gazebo/Green</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 1 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <shader type='pixel'/>
         </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-      <self_collide>0</self_collide>
+      <collision name='rotor_2_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.128</radius>
+            <length>0.005</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
     </link>
-    <joint name='rotor_2_joint' type='revolute'>
-      <child>rotor_2</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
     <link name='rotor_3'>
       <pose frame=''>-0.159 -0.159 0.11 0 -0 0</pose>
       <inertial>
@@ -520,23 +566,9 @@
           <izz>0.000274004</izz>
         </inertia>
       </inertial>
-      <collision name='rotor_3_collision'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.128</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <velocity_decay/>
       <visual name='rotor_3_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
@@ -550,28 +582,322 @@
             <name>Gazebo/Red</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <shader type='pixel'/>
         </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
       </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-      <self_collide>0</self_collide>
+      <collision name='rotor_3_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.128</radius>
+            <length>0.005</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
     </link>
-    <joint name='rotor_3_joint' type='revolute'>
-      <child>rotor_3</child>
+    <joint name='/imu_joint' type='revolute'>
       <parent>base_link</parent>
+      <child>/imu_link</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>1 0 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
         </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
     </joint>
+
+    <joint name='f450/down_cam_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>f450/robot_camera_down</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='f450/down_sonar_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>f450/robot_sonar_down</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='f450/front_cam_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>f450/robot_camera</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='rotor_0_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>rotor_0</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='rotor_1_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>rotor_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='rotor_2_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>rotor_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='rotor_3_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>rotor_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
     <plugin name='rosbag' filename='librotors_gazebo_multirotor_base_plugin.so'>
       <robotNamespace/>
       <linkName>base_link</linkName>
@@ -748,7 +1074,6 @@
         </channel>
       </control_channels>
     </plugin>
-    <static>0</static>
     <plugin name='rotors_gazebo_imu_plugin' filename='librotors_gazebo_imu_plugin.so'>
       <robotNamespace/>
       <linkName>/imu_link</linkName>
@@ -762,5 +1087,7 @@
       <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
       <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
     </plugin>
+
+
   </model>
 </sdf>
