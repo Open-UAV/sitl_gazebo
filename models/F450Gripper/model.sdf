@@ -16,7 +16,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
       <self_collide>1</self_collide>
-      <kinematic>0</kinematic>
+      <kinematic>1</kinematic>
       <gravity>1</gravity>
       <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -104,7 +104,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
       <self_collide>1</self_collide>
-      <kinematic>0</kinematic>
+      <kinematic>1</kinematic>
       <gravity>1</gravity>
       <visual name='ModelPreview_1::link_1_clone::visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -192,7 +192,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
       <self_collide>1</self_collide>
-      <kinematic>0</kinematic>
+      <kinematic>1</kinematic>
       <gravity>1</gravity>
       <visual name='ModelPreview_1::link_1_clone_0::visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -273,8 +273,8 @@
         <xyz>0 1 0</xyz>
         <use_parent_model_frame>0</use_parent_model_frame>
         <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
+          <lower>-2</lower>
+          <upper>-0.05</upper>
           <effort>-1</effort>
           <velocity>-1</velocity>
         </limit>
@@ -310,8 +310,8 @@
         <xyz>0 1 0</xyz>
         <use_parent_model_frame>0</use_parent_model_frame>
         <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
+          <lower>0.05</lower>
+          <upper>2</upper>
           <effort>-1</effort>
           <velocity>-1</velocity>
         </limit>
