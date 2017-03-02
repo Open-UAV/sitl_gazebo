@@ -14,7 +14,7 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
     <include>
-      <uri>model://f450-trap</uri>
+      <uri>model://smart-probe</uri>
       <pose>9 2 0.1 0 0 0</pose>
     </include>
     <model name='ground_plane'>
