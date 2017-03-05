@@ -49,7 +49,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/jdas/src/Firmware/Tools/sitl_gazebo/models/rotors_description/meshes/f450.dae</uri>
+            <uri>/home/nsf/src/Firmware/Tools/sitl_gazebo/models/rotors_description/meshes/f450.dae</uri>
           </mesh>
         </geometry>
         <surface>
