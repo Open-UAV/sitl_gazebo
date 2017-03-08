@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+<model name = "PhytobiopsyAssembly">
+
+<link name="Bottom">
+
+<pose>0 -0.12 -0.11 0 0 0</pose>
+
+<inertial>
+<pose> 0.12 0.07 0.16 0 0 0</pose>
+<mass> 0.15502294</mass>
+<inertia>
+<ixx>0.00016521</ixx>
+<iyy>0.00074812</iyy>
+<izz>0.00087562</izz>
+<ixy>-0.00008580</ixy>
+<ixz>0.00000674</ixz>
+<iyz>-0.00000277</iyz>
+</inertia>
+</inertial>
+
+<collision name="Base_collision">
+<pose> 0 0.125 0.14 1.5708 0 0 </pose>
+<geometry>
+<mesh>
+<uri>model://PhytobiopsyAssembly/meshes/mock_bottom.dae</uri>
+</mesh>
+</geometry>
+</collision>
+
+<visual name="Base_visual">
+<geometry>
+<mesh>
+<uri>model://PhytobiopsyAssembly/meshes/bottom.dae</uri>
+</mesh>
+</geometry>
+</visual>
+
+</link>
+
+<link name="Top">
+
+<pose>0.2695 -0.119 -0.115 0 0 0</pose>
+
+<inertial>
+<pose> 0.115 0.07 0.16 0 0 0</pose>
+<mass> 0.12067183</mass>
+<inertia>
+<ixx>0.00017544</ixx>
+<iyy>0.00057466</iyy>
+<izz>0.00065738</izz>
+<ixy>-0.00009377</ixy>
+<ixz>0.00009018</ixz>
+<iyz>-0.00004054</iyz>
+</inertia>
+</inertial>
+
+<collision name="Top_collision">
+<geometry>
+<mesh>
+<uri>model://PhytobiopsyAssembly/meshes/top.dae</uri>
+</mesh>
+</geometry>
+</collision>
+
+<visual name="Top_visual">
+<geometry>
+<mesh>
+<uri>model://PhytobiopsyAssembly/meshes/top.dae</uri>
+</mesh>
+</geometry>
+</visual>
+
+</link>
+
+<joint name = "Arm_joint" type="revolute">
+
+<pose>0.0175 0.065 0.1675 0 0 0</pose>
+<child>Top</child>
+<parent>Bottom</parent>
+<axis>
+<limit>
+<upper>3.141526</upper>
+<lower>0</lower>
+</limit>
+<xyz>0 1 0</xyz>
+</axis>
+</joint>
+
+
+<self_collide>true</self_collide>
+</model>
+</sdf>
+

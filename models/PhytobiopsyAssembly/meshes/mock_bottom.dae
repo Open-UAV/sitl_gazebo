@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.77.0 commit date:2016-04-05, commit time:18:12, hash:abf6f08</authoring_tool>
+    </contributor>
+    <created>2016-07-05T09:23:59</created>
+    <modified>2016-07-05T09:23:59</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images/>
+  <library_geometries>
+    <geometry id="Gazebo_mock_bottom-mesh" name="Gazebo mock bottom">
+      <mesh>
+        <source id="Gazebo_mock_bottom-mesh-positions">
+          <float_array id="Gazebo_mock_bottom-mesh-positions-array" count="96">104.14 49.27605 57.65803 104.14 4.84288e-5 57.65803 104.14 49.27605 30.22603 104.14 4.84288e-5 30.22603 104.14 4.84288e-5 2.5e-5 104.14 49.27605 2.5e-5 104.14 4.84288e-5 23.87602 104.14 49.27605 23.87602 104.14 49.27605 74.16802 104.14 4.84288e-5 74.16802 104.14 49.27605 64.00802 104.14 4.84288e-5 64.00802 12.19202 4.84288e-5 74.16802 12.19202 49.27605 74.16802 12.19202 4.84288e-5 2.5e-5 12.19202 49.27605 2.5e-5 48.00602 4.84288e-5 74.16802 293.37 4.84288e-5 57.65803 293.37 4.84288e-5 64.00802 48.00602 4.84288e-5 119.888 2.51457e-5 4.84288e-5 74.16802 2.51457e-5 4.84288e-5 119.888 293.37 4.84288e-5 30.22603 293.37 4.84288e-5 23.87602 2.51457e-5 49.27605 74.16802 2.51457e-5 49.27605 119.888 48.00602 49.27605 119.888 48.00602 49.27605 74.16802 293.37 49.27605 30.22603 293.37 49.27605 23.87602 293.37 49.27605 57.65803 293.37 49.27605 64.00802</float_array>
+          <technique_common>
+            <accessor source="#Gazebo_mock_bottom-mesh-positions-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Gazebo_mock_bottom-mesh-normals">
+          <float_array id="Gazebo_mock_bottom-mesh-normals-array" count="30">1 0 0 -1 0 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 2.22468e-7 0 1 0 0 0 1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#Gazebo_mock_bottom-mesh-normals-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Gazebo_mock_bottom-mesh-vertices">
+          <input semantic="POSITION" source="#Gazebo_mock_bottom-mesh-positions"/>
+        </vertices>
+        <polylist count="60">
+          <input semantic="VERTEX" source="#Gazebo_mock_bottom-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Gazebo_mock_bottom-mesh-normals" offset="1"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>0 0 1 0 2 0 2 0 1 0 3 0 4 0 5 0 6 0 6 0 5 0 7 0 8 0 9 0 10 0 10 0 9 0 11 0 12 1 13 1 14 1 14 1 13 1 15 1 11 2 9 2 16 2 1 2 17 2 18 2 4 2 6 2 14 2 14 3 6 3 16 3 14 2 16 2 12 2 12 2 16 2 19 2 12 4 19 4 20 4 20 2 19 2 21 2 18 2 11 2 1 2 1 2 11 2 16 2 1 2 16 2 3 2 3 2 16 2 6 2 3 2 6 2 22 2 22 2 6 2 23 2 7 5 5 5 15 5 24 5 25 5 13 5 13 6 25 6 26 6 13 5 26 5 15 5 26 5 27 5 15 5 15 7 27 7 8 7 15 5 8 5 10 5 2 5 28 5 29 5 29 5 7 5 2 5 2 5 7 5 15 5 2 5 15 5 0 5 0 5 15 5 10 5 0 5 10 5 30 5 30 5 10 5 31 5 9 8 8 8 16 8 16 8 8 8 27 8 5 9 4 9 15 9 15 9 4 9 14 9 12 9 20 9 13 9 13 9 20 9 24 9 21 1 25 1 20 1 20 1 25 1 24 1 26 0 19 0 27 0 27 0 19 0 16 0 19 8 26 8 21 8 21 8 26 8 25 8 18 8 31 8 11 8 11 8 31 8 10 8 30 9 17 9 0 9 0 9 17 9 1 9 17 0 30 0 18 0 18 0 30 0 31 0 22 8 28 8 3 8 3 8 28 8 2 8 29 9 23 9 7 9 7 9 23 9 6 9 23 0 29 0 22 0 22 0 29 0 28 0</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Gazebo_mock_bottom" name="Gazebo_mock_bottom" type="NODE">
+        <matrix sid="transform">0.001 0 0 0 0 0.001 0 0 0 0 0.001 0 0 0 0 1</matrix>
+        <instance_geometry url="#Gazebo_mock_bottom-mesh" name="Gazebo_mock_bottom"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
