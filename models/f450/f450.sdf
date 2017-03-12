@@ -24,7 +24,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://rotors_description/meshes/f450.dae</uri>
+            <uri>model://f450/meshes/f450.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -49,7 +49,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/nsf/src/Firmware/Tools/sitl_gazebo/models/rotors_description/meshes/f450.dae</uri>
+            <uri>model://f450/meshes/f450.dae</uri>
           </mesh>
         </geometry>
         <surface>
