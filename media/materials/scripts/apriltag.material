@@ -1,0 +1,13 @@
+material AprilTag/Image
+    {
+      technique
+      {
+        pass
+        {
+          texture_unit
+          {
+            texture apriltag36h110.png
+          }
+        }
+      }
+    }

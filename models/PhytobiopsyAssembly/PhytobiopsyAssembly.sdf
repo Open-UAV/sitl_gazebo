@@ -8,18 +8,18 @@
 
 <inertial>
 <pose> 0.12 0.07 0.16 0 0 0</pose>
-<mass> 0.15502294</mass>
+<mass> 0.2502294</mass>
 <inertia>
-<ixx>0.00016521</ixx>
-<iyy>0.00074812</iyy>
-<izz>0.00087562</izz>
+<ixx>0.6521</ixx>
+<iyy>0.74812</iyy>
+<izz>0.87562</izz>
 <ixy>-0.00008580</ixy>
 <ixz>0.00000674</ixz>
 <iyz>-0.00000277</iyz>
 </inertia>
 </inertial>
 
-<collision name="Base_collision">
+<collision name="Bottom_collision">
 <pose> 0 0.125 0.14 1.5708 0 0 </pose>
 <geometry>
 <mesh>
@@ -28,7 +28,7 @@
 </geometry>
 </collision>
 
-<visual name="Base_visual">
+<visual name="Bottom_visual">
 <geometry>
 <mesh>
 <uri>model://PhytobiopsyAssembly/meshes/bottom.dae</uri>

@@ -13,10 +13,16 @@
       </attenuation>
       <direction>-0.5 0.1 -0.9</direction>
     </light>
+<!--
     <include>
       <uri>model://smart-probe</uri>
       <pose>9 2 0.1 0 0 0</pose>
-    </include>
+    </include> -->
+<include>
+      <uri>model://apriltag</uri>
+      <pose>7 3 1 0 0 0</pose>
+
+ </include>
     <model name='ground_plane'>
       <static>1</static>
       <link name='link'>

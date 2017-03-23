@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<sdf version='1.5'>
+ <model name="phyto">
+
+    <include>
+      <uri>model://f450</uri>
+      <pose>0 0 0.6 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://PhytobiopsyAssembly</uri>
+      <pose>0.443 -0.027 0.562 0 0 3.1415926</pose>
+    </include>
+
+    <joint name="gripper_joint" type="revolute">
+      <parent>PhytobiopsyAssembly::Top</parent>
+      <child>f450::base_link</child>
+      <axis>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>1 0 0</xyz>
+      </axis>
+    </joint>
+<self_collide>false</self_collide>
+  </model>
+
+</sdf>
+
