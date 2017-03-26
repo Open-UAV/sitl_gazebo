@@ -3,13 +3,19 @@
  <model name="phyto">
 
     <include>
+      <uri>model://big_box</uri>
+      <pose>1 1 0.75 0 0 0</pose>
+   </include>
+
+
+    <include>
       <uri>model://f450</uri>
-      <pose>0 0 0.6 0 0 0</pose>
-    </include>
+      <pose>0 0 0.7 0 0 0</pose>
+   </include>
 
     <include>
       <uri>model://PhytobiopsyAssembly</uri>
-      <pose>0.443 -0.027 0.562 0 0 3.1415926</pose>
+      <pose>0.443 -0.027 0.662 0 0 3.1415926</pose>
     </include>
 
     <joint name="gripper_joint" type="revolute">
@@ -23,6 +29,20 @@
         <xyz>1 0 0</xyz>
       </axis>
     </joint>
+
+    <joint name="stationary" type="revolute">
+      <parent>Big box::link</parent>
+      <child>f450::base_link</child>
+      <axis>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>1 0 0</xyz>
+      </axis>
+    </joint>
+
+
 <self_collide>false</self_collide>
   </model>
 
